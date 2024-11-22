@@ -8,21 +8,21 @@ Overview
 This project demonstrates the implementation of the classic Producer-Consumer Problem using C programming and semaphores. The program showcases how to synchronize two threads (producer and consumer) accessing a shared circular buffer with a fixed size of 15. It focuses on managing resource sharing, avoiding race conditions, and ensuring proper inter-thread communication.
 
 Features
-	•Implements a circular buffer with 15 slots for inter-thread communication.
-	•Uses POSIX semaphores for synchronization:
-	•empty: Tracks empty slots in the buffer.
-	•full: Tracks filled slots in the buffer.
-	•mutex: Ensures mutual exclusion when accessing the buffer.
-	•Includes a producer thread:
-	•Reads characters from a file (mytest.dat).
-	•Writes characters into the circular buffer.
-	•Signals completion by inserting a special marker (*).
-	•Includes a consumer thread:
-	•Reads characters from the circular buffer.
-	•Prints characters to the screen with a 1-second delay between reads.
-	•Stops when the special marker (*) is read.
-	•Handles up to 150 characters from the input file.
-	•Ensures proper cleanup of semaphores and resources after execution.
+	Implements a circular buffer with 15 slots for inter-thread communication.
+	Uses POSIX semaphores for synchronization:
+	empty: Tracks empty slots in the buffer.
+	full: Tracks filled slots in the buffer.
+	mutex: Ensures mutual exclusion when accessing the buffer.
+	Includes a producer thread:
+	Reads characters from a file (mytest.dat).
+	Writes characters into the circular buffer.
+	Signals completion by inserting a special marker (*).
+	Includes a consumer thread:
+	Reads characters from the circular buffer.
+	Prints characters to the screen with a 1-second delay between reads.
+	Stops when the special marker (*) is read.
+	Handles up to 150 characters from the input file.
+	Ensures proper cleanup of semaphores and resources after execution.
 
  How it Works
  	Producer:
