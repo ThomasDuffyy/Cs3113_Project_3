@@ -26,17 +26,17 @@ Features
 
  How it Works
  	Producer:
-	•Reads characters from a file (mytest.dat) one by one.
-	•Writes each character into the buffer, waiting if the buffer is full.
-	•Inserts a special marker (*) to signal the end of input.
+	Reads characters from a file (mytest.dat) one by one.
+	Writes each character into the buffer, waiting if the buffer is full.
+	Inserts a special marker (*) to signal the end of input.
 	Consumer:
-	•Reads characters from the buffer, waiting if the buffer is empty.
-	•Prints each character to the screen.
-	•Sleeps for 1 second after printing each character to simulate a slower consumer.
+	Reads characters from the buffer, waiting if the buffer is empty.
+	Prints each character to the screen.
+	Sleeps for 1 second after printing each character to simulate a slower consumer.
 	Synchronization:
-	•Semaphores ensure:
-	•The producer and consumer do not access the buffer simultaneously.
-	•The producer does not overwrite unread data, and the consumer does not read unproduced data.
+	Semaphores ensure:
+	The producer and consumer do not access the buffer simultaneously.
+	The producer does not overwrite unread data, and the consumer does not read unproduced data.
 
  Set up and compilation instructions
 
