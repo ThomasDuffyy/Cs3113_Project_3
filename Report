@@ -11,90 +11,89 @@ the buffer, while the consumer retrieves these characters and prints them to the
 
 Key Objectives
 
-	•	Learn to use semaphores to protect shared resources.
-	•	Understand multithreading and inter-thread communication.
-	•	Implement synchronization mechanisms in C to prevent race conditions and deadlocks.
+	•Learn to use semaphores to protect shared resources.
+	•Understand multithreading and inter-thread communication.
+	•Implement synchronization mechanisms in C to prevent race conditions and deadlocks.
 
 Problem Statement
-This program addresses the classic producer-consumer synchronization problem:
-	•	The producer reads characters from a file named mytest.dat (up to 150 characters) and writes them to a shared circular buffer of size 15.
-	•	The consumer reads characters from the buffer and prints them one at a time with a delay of one second per character.
-	•	The buffer is protected using semaphores to ensure that producer and consumer threads do not interfere with each other’s operations.
-	•	The producer signals the end of production by inserting a special character (*) into the buffer.
+	This program addresses the classic producer-consumer synchronization problem:
+	•The producer reads characters from a file named mytest.dat (up to 150 characters) and writes them to a shared circular buffer of size 15.
+	•The consumer reads characters from the buffer and prints them one at a time with a delay of one second per character.
+	•The buffer is protected using semaphores to ensure that producer and consumer threads do not interfere with each other’s operations.
+	•The producer signals the end of production by inserting a special character (*) into the buffer.
 
 Design and Implementation
 
-Circular Buffer
-
-The circular buffer is implemented as an array of 15 characters. Two pointers, in and out, are used to manage the producer’s write position
-and the consumer’s read position, respectively. These pointers wrap around to the beginning when they reach the buffer’s end.
+	Circular Buffer: The circular buffer is implemented as an array of 15 characters. Two pointers, in and out, are used to manage the 
+	producer’s write position and the consumer’s read position, respectively. These pointers wrap around to the beginning when they reach 
+	the buffer’s end.
 
 Semaphores
 
-Three semaphores are used:
-	1.	empty: Tracks the number of empty slots in the buffer, initialized to 15.
-	2.	full: Tracks the number of filled slots in the buffer, initialized to 0.
-	3.	mutex: Ensures mutual exclusion when accessing the buffer, initialized to 1.
+	Three semaphores are used:
+	1.empty: Tracks the number of empty slots in the buffer, initialized to 15.
+	2.full: Tracks the number of filled slots in the buffer, initialized to 0.
+	3.mutex: Ensures mutual exclusion when accessing the buffer, initialized to 1.
 
 Threads
 
-	1.	Producer Thread: Reads one character at a time from mytest.dat and writes it to the circular buffer. When the end of 
-      the file is reached, it writes the special marker * to indicate completion.
-	2.	Consumer Thread: Reads characters from the buffer, prints them to the screen, and introduces a delay of one second between 
-      reads. The consumer stops when it reads the * marker.
+	1.Producer Thread: Reads one character at a time from mytest.dat and writes it to the circular buffer. When the end of 
+          the file is reached, it writes the special marker * to indicate completion.
+	2.Consumer Thread: Reads characters from the buffer, prints them to the screen, and introduces a delay of one second between 
+          reads. The consumer stops when it reads the * marker.
 
 Special Features
 
 	The program uses semaphores to ensure synchronization and avoid race conditions.
-	•	The consumer thread operates slower than the producer, simulating real-world scenarios where producers often work faster than consumers.
+	•The consumer thread operates slower than the producer, simulating real-world scenarios where producers often work faster than consumers.
 
 Code Explanation 
   Producer Function
 
-	•	Reads characters from mytest.dat.
-	•	Writes each character to the circular buffer after waiting for an empty slot.
-	•	Inserts * at the end to indicate completion. 
+	•Reads characters from mytest.dat.
+	•Writes each character to the circular buffer after waiting for an empty slot.
+	•Inserts * at the end to indicate completion. 
 
-  Consumer Function
+Consumer Function
 
-	•	Waits for a filled slot before reading from the buffer.
-	•	Prints characters to the screen one by one.
-	•	Sleeps for one second after each read to simulate a slower process.
+	•Waits for a filled slot before reading from the buffer.
+	•Prints characters to the screen one by one.
+	•Sleeps for one second after each read to simulate a slower process.
 
-  Main Function
+Main Function
 
-	•	Creates producer and consumer threads.
-	•	Waits for both threads to complete.
-	•	Cleans up semaphores after threads exit.
+	•Creates producer and consumer threads.
+	•Waits for both threads to complete.
+	•Cleans up semaphores after threads exit.
 
 Testing
 
-	•	A test file named mytest.dat was created containing the text: 
-This is the test file for Project3, circular buffer program, Testing producer and consumer threads!
+	•A test file named mytest.dat was created containing the text: This is the test file for Project3, circular buffer program, Testing 
+	producer and consumer threads!
 
-  •The program was compiled using: gcc -pthread -o Project_3 Project_3.c
+  	•The program was compiled using: gcc -pthread -o Project_3 Project_3.c
 
 Results
 
-	•	The producer quickly added characters to the buffer.
-	•	The consumer printed each character one by one with a one-second delay.
-	•	The program terminated after printing the * marker.
+	•The producer quickly added characters to the buffer.
+	•The consumer printed each character one by one with a one-second delay.
+	•The program terminated after printing the * marker.
 
-6.3 Edge Cases
+Edge Cases
 
-	•	File with fewer than 15 characters.
-	•	File with exactly 150 characters.
-	•	Empty file or missing file.
+	•File with fewer than 15 characters.
+	•File with exactly 150 characters.
+	•Empty file or missing file.
 
 Challenges and Solutions
 
 Challenges
 
-	•	Ensuring proper synchronization between threads.
-	•	Preventing race conditions and deadlocks.
-	•	Testing various edge cases with different file sizes.
+	•Ensuring proper synchronization between threads.
+	•Preventing race conditions and deadlocks.
+	•Testing various edge cases with different file sizes.
 
 Solutions
 
-	•	Used semaphores to manage buffer access.
-	•	Tested various file sizes to ensure correctness.
+	•Used semaphores to manage buffer access.
+	•Tested various file sizes to ensure correctness.
